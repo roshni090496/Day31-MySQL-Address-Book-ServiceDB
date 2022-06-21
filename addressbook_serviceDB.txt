@@ -1,0 +1,161 @@
+Enter password: *************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.29 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE addressbook_serviceDB;
+Query OK, 1 row affected (2.90 sec)
+
+mysql> USE addressbook_serviceDB;
+Database changed
+mysql> CREATE TABLE addressbook(first_name VARCHAR(30),last_name VARCHAR(40),address VARCHAR(60),city VARCHAR(40),state VARCHAR(40),zip VARCHAR(10),phone VARCHAR(12),email VARCHAR(50));
+Query OK, 0 rows affected (3.66 sec)
+
+mysql> INSERT INTO addressbook VALUES('Roshni','Singh','Algarah','Kalimpong','WestBengal','841238','9771663408','singhroshni@gmail.com');
+Query OK, 1 row affected (0.32 sec)
+
+mysql>  INSERT INTO addressbook VALUES('Raj','Singh','Pedong','Kalimpong','WestBengal','871298','9776663008','singhraj@gmail.com');
+Query OK, 1 row affected (0.13 sec)
+
+mysql>  INSERT INTO addressbook VALUES('Seeya','Rana','Maharajganj','Siwan','Bihar','841238','9571663408','sseeya@gmail.com');
+Query OK, 1 row affected (0.07 sec)
+
+mysql>  INSERT INTO addressbook VALUES('Rohit','Dey','Ranchi','Ranchi','Dhanbad','740237','9779362098','deysaab@gmail.com');
+Query OK, 1 row affected (0.20 sec)
+
+mysql> SELECT * FROM addressbook;
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+
+| first_name | last_name | address     | city      | state      | zip    | phone      | email                 |
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+
+| Roshni     | Singh     | Algarah     | Kalimpong | WestBengal | 841238 | 9771663408 | singhroshni@gmail.com |
+| Raj        | Singh     | Pedong      | Kalimpong | WestBengal | 871298 | 9776663008 | singhraj@gmail.com    |
+| Seeya      | Rana      | Maharajganj | Siwan     | Bihar      | 841238 | 9571663408 | sseeya@gmail.com      |
+| Rohit      | Dey       | Ranchi      | Ranchi    | Dhanbad    | 740237 | 9779362098 | deysaab@gmail.com     |
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+
+4 rows in set (0.09 sec)
+
+mysql> UPDATE addressbook set address='Bokaro',phone='9779362098' where first_name='Rohit';
+Query OK, 1 row affected (0.21 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM addressbook;
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+
+| first_name | last_name | address     | city      | state      | zip    | phone      | email                 |
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+
+| Roshni     | Singh     | Algarah     | Kalimpong | WestBengal | 841238 | 9771663408 | singhroshni@gmail.com |
+| Raj        | Singh     | Pedong      | Kalimpong | WestBengal | 871298 | 9776663008 | singhraj@gmail.com    |
+| Seeya      | Rana      | Maharajganj | Siwan     | Bihar      | 841238 | 9571663408 | sseeya@gmail.com      |
+| Rohit      | Dey       | Bokaro      | Ranchi    | Dhanbad    | 740237 | 9779362098 | deysaab@gmail.com     |
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+
+4 rows in set (0.00 sec)
+
+mysql> DELETE FROM addressbook WHERE first_name='Rohit';
+Query OK, 1 row affected (0.17 sec)
+
+mysql> SELECT * FROM addressbook;
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+
+| first_name | last_name | address     | city      | state      | zip    | phone      | email                 |
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+
+| Roshni     | Singh     | Algarah     | Kalimpong | WestBengal | 841238 | 9771663408 | singhroshni@gmail.com |
+| Raj        | Singh     | Pedong      | Kalimpong | WestBengal | 871298 | 9776663008 | singhraj@gmail.com    |
+| Seeya      | Rana      | Maharajganj | Siwan     | Bihar      | 841238 | 9571663408 | sseeya@gmail.com      |
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM addressbook WHERE city='Kalimpong';
++------------+-----------+---------+-----------+------------+--------+------------+-----------------------+
+| first_name | last_name | address | city      | state      | zip    | phone      | email                 |
++------------+-----------+---------+-----------+------------+--------+------------+-----------------------+
+| Roshni     | Singh     | Algarah | Kalimpong | WestBengal | 841238 | 9771663408 | singhroshni@gmail.com |
+| Raj        | Singh     | Pedong  | Kalimpong | WestBengal | 871298 | 9776663008 | singhraj@gmail.com    |
++------------+-----------+---------+-----------+------------+--------+------------+-----------------------+
+2 rows in set (0.03 sec)
+
+mysql> SELECT * FROM addressbook WHERE state='WestBengal';
++------------+-----------+---------+-----------+------------+--------+------------+-----------------------+
+| first_name | last_name | address | city      | state      | zip    | phone      | email                 |
++------------+-----------+---------+-----------+------------+--------+------------+-----------------------+
+| Roshni     | Singh     | Algarah | Kalimpong | WestBengal | 841238 | 9771663408 | singhroshni@gmail.com |
+| Raj        | Singh     | Pedong  | Kalimpong | WestBengal | 871298 | 9776663008 | singhraj@gmail.com    |
++------------+-----------+---------+-----------+------------+--------+------------+-----------------------+
+2 rows in set (0.05 sec)
+
+mysql> SELECT count(state) FROM addressbook WHERE state='WestBengal';
++--------------+
+| count(state) |
++--------------+
+|            2 |
++--------------+
+1 row in set (0.08 sec)
+
+mysql> SELECT count(city) FROM addressbook WHERE city='Kalimpong';
++-------------+
+| count(city) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT first_name FROM addressbook WHERE city='Kalimpong' order by first_name;
++------------+
+| first_name |
++------------+
+| Raj        |
+| Roshni     |
++------------+
+2 rows in set (0.01 sec)
+
+mysql> ALTER TABLE addressbook add column bname VARCHAR(20), add column btype VARCHAR(20);
+Query OK, 0 rows affected (0.96 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM addressbook ;
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+-------+-------+
+| first_name | last_name | address     | city      | state      | zip    | phone      | email                 | bname | btype |
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+-------+-------+
+| Roshni     | Singh     | Algarah     | Kalimpong | WestBengal | 841238 | 9771663408 | singhroshni@gmail.com | NULL  | NULL  |
+| Raj        | Singh     | Pedong      | Kalimpong | WestBengal | 871298 | 9776663008 | singhraj@gmail.com    | NULL  | NULL  |
+| Seeya      | Rana      | Maharajganj | Siwan     | Bihar      | 841238 | 9571663408 | sseeya@gmail.com      | NULL  | NULL  |
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE addressbook set bname='simple', btype='professional';
+Query OK, 3 rows affected (0.10 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> SELECT * FROM addressbook ;
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+--------+--------------+
+| first_name | last_name | address     | city      | state      | zip    | phone      | email                 | bname  | btype        |
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+--------+--------------+
+| Roshni     | Singh     | Algarah     | Kalimpong | WestBengal | 841238 | 9771663408 | singhroshni@gmail.com | simple | professional |
+| Raj        | Singh     | Pedong      | Kalimpong | WestBengal | 871298 | 9776663008 | singhraj@gmail.com    | simple | professional |
+| Seeya      | Rana      | Maharajganj | Siwan     | Bihar      | 841238 | 9571663408 | sseeya@gmail.com      | simple | professional |
++------------+-----------+-------------+-----------+------------+--------+------------+-----------------------+--------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO addressbook VALUES('Sweety','Singh','Lava','Kalimpong','WestBengal','414300','9432658670','ssweety@gmail.com','simple','education');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO addressbook VALUES('Baby','Singh','Ghum','Darjeeling','WestBengal','410409','9432658672','sbaby@gmail.com','simple','education');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> SELECT * FROM addressbook ;
++------------+-----------+-------------+------------+------------+--------+------------+-----------------------+--------+--------------+
+| first_name | last_name | address     | city       | state      | zip    | phone      | email                 | bname  | btype        |
++------------+-----------+-------------+------------+------------+--------+------------+-----------------------+--------+--------------+
+| Roshni     | Singh     | Algarah     | Kalimpong  | WestBengal | 841238 | 9771663408 | singhroshni@gmail.com | simple | professional |
+| Raj        | Singh     | Pedong      | Kalimpong  | WestBengal | 871298 | 9776663008 | singhraj@gmail.com    | simple | professional |
+| Seeya      | Rana      | Maharajganj | Siwan      | Bihar      | 841238 | 9571663408 | sseeya@gmail.com      | simple | professional |
+| Sweety     | Singh     | Lava        | Kalimpong  | WestBengal | 414300 | 9432658670 | ssweety@gmail.com     | simple | education    |
+| Baby       | Singh     | Ghum        | Darjeeling | WestBengal | 410409 | 9432658672 | sbaby@gmail.com       | simple | education    |
++------------+-----------+-------------+------------+------------+--------+------------+-----------------------+--------+--------------+
+5 rows in set (0.00 sec)
+
